@@ -215,4 +215,131 @@ func main() {
 	fmt.Println(sqrt(2), sqrt(-4))
 }
 ```
+```go
+//if with a short statement
+package main
 
+import (
+	"fmt"
+	"math"
+)
+//if
+func pow(x, n, lim float64) float64 {
+	if v := math.Pow(x, n); v < lim {
+		return v
+	}
+	return lim
+}
+//if-else
+func pow(x, n, lim float64) float64 {
+	if v := math.Pow(x, n); v < lim {
+		return v
+	} else {
+		fmt.Printf("%g >= %g\n", v, lim)
+	}
+	return lim
+}
+
+func main() {
+	fmt.Println(
+		pow(3, 2, 10),
+		pow(3, 3, 20),
+	)
+}
+
+```
+```go
+// implementation
+package main
+
+import (
+	"fmt"
+)
+
+func Sqrt(x float64) float64 {
+	z := float64(1)
+	fmt.Printf("Sqrt approximation of %v:\n",x)
+	for i:=1;i<=10;i++ {
+		z -= (z*z -x)/(2*z)
+		fmt.Printf("Iteration %v,value = %v\n",i,z)
+	}
+	return z
+}
+
+func main() {
+	fmt.Println(Sqrt(2))
+}
+```
+```go
+//switch
+package main
+
+import (
+	"fmt"
+	"runtime"
+    "time"
+)
+
+func main()  {
+	switch os:= runtime.GOOS; os {
+
+	case "darwin":
+		fmt.Println("OS x.")
+	case "linux":
+		fmt.Println("Linux")
+	default:
+		fmt.Printf("%s.\n",os)
+	}
+}
+
+func main() {
+	today := time.Now().Weekday()
+	switch time.Sunday {
+
+	case today + 0:
+		fmt.Println("Today")
+	case today + 1:
+		fmt.Println("Tomorrow")
+	case today + 2:
+		fmt.Println("In two days")
+	default:
+		fmt.Println("Too far away")
+	}
+}
+// switch with no condition, same as switch true
+func main() {
+	t := time.Now()
+	switch  {
+	case t.Hour()<12:
+		fmt.Println("Good morning")
+	case t.Hour()<17:
+		fmt.Println("Good afternoon")
+	default:
+		fmt.Println("Good evening")
+	}
+}
+```
+```go
+// defer statement defers the execution until surrounding function returns
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	defer fmt.Println("World")
+	fmt.Println("Hello")
+}
+
+//Deferred function calls are pushed onto a stack. When a function returns, its deferred calls are executed in last-in-first-out order.
+func main() {
+
+	fmt.Println("counting")
+	for i:=0;i<10;i++ {
+		defer fmt.Println(i)
+	}
+	fmt.Println("done")
+}
+
+```
